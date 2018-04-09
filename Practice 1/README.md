@@ -9,7 +9,7 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
 
 3. Verify pulled docker images 
   $ docker images
-  Start a docker container (alpine:3.4) interactively (-ti) and then remove after exit (--rm). It gives back interactive shell prompt (/ #) and verify software installed randomly.
+  Start a docker container (alpine:3.4) *interactively* (-ti) and then *remove after exit* (--rm). It gives back interactive shell prompt (/ #) and verify software installed randomly.
   ```
   $ docker run -ti --rm alpine:3.4 /bin/sh
   / # 
@@ -29,7 +29,7 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
   
 ```Dockerfile
   FROM alpine:3.4
-  MAINTAINER BJ Choi bjchoi.3698@gmail.com
+  MAINTAINER ...
   # Run a few package install for test purpose
   RUN apk update
   RUN apk add vim
@@ -42,7 +42,7 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
   Sending build context to Docker daemon  10.75kB
   Step 1/5 : FROM alpine:3.4
    ---> c7fc7faf8c28
-  Step 2/5 : MAINTAINER BJ Choi bjchoi.3698@gmail.com
+  Step 2/5 : MAINTAINER ...
    ---> Running in 5b324c4b6ed2
   Removing intermediate container 5b324c4b6ed2
    ---> 387a8c9a7a51
@@ -113,7 +113,7 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
   
   ```Dockerfile Updated: replaced vim with git
   FROM alpine:3.4
-  MAINTAINER BJ Choi bjchoi.3698@gmail.com
+  MAINTAINER ...
   # Run a few package install for test purpose
   RUN apk update
   RUN apk add git
