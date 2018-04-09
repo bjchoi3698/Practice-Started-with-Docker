@@ -40,6 +40,7 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
 ```
 
   Build a docker image
+  ```
   $ docker build -t bj/apline-new:1.0 .
   ( -t (tag) bj(provider)/alpine-new(image):1.0 (tag) . (from current directory) )
   Sending build context to Docker daemon  10.75kB
@@ -82,7 +83,9 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
    ---> 3bfc847b6020
   Successfully built 3bfc847b6020
   Successfully tagged bj/alpine-new:1.0
-  
+  ```
+  Check docker images.
+  ```
   $ docker images
   REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
   bj/alpine-new       1.0                 3bfc847b6020        18 minutes ago      32.2MB
@@ -96,6 +99,7 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
   <none>              <none>              387a8c9a7a51        19 minutes ago      4.82MB
     ...
   alpine              3.4                 c7fc7faf8c28        2 months ago        4.82MB
+  ```
   
   With <none> REPOSITORY, it is an intermediate image that could be used as cache image for later build. 
   Check the SIZE changes over the different IMAGE ID.
@@ -103,20 +107,21 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
   It is the way we could build a customized docker image (bj/alpine-new:1.0) from the base image (alpine:3.4).
   We can check if vim and curl were installed on a new image.
   
+  ```
   $ docker run -ti --rm bj/alpine-new:1.0 /bin/sh
   / # curl
   / # vim
+  ```
   
   Next exercise is to change package instal if we want 'git', but not 'vim'. Update Dockerfile.
   
   RUN apk add git
   
-  Build a docker image
+  Build a docker image. 
   
+  ```
   $ docker build -t bj/alpine-new:1.0 
-  
-  It will install git, but for curl, we use a cached image.
-  
+  ...
   Step 4/5 : RUN apk add git
    ---> Running in 6594f7d633bc
   (1/6) Installing ca-certificates (20161130-r0)
@@ -139,23 +144,33 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
    ---> ccda6e61d80d
   Successfully built ccda6e61d80d
   Successfully tagged bj/alpine-new:1.0
+  ```
   
+  Verify the docker image again.
+  ```
   $ docker images
   REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
   bj/alpine-new       1.0                 ccda6e61d80d        2 minutes ago       23.5MB
   <none>              <none>              3bfc847b6020        37 minutes ago      32.2MB
+  ```
   
   In here, <none> is not cached image, but it is the previously built image, called dangling image supposed to be clean.
-  $ docker images --filter "dangling=true"
+  
+ ```
+ $ docker images --filter "dangling=true"
   REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
   <none>              <none>              3bfc847b6020        40 minutes ago      32.2MB
+ ```
     
   We can remove it as
+  ```
   $ docker rmi $(docker images -q --filter "dangling:true")
   Deleted: sha256:3bfc847b602081075892585d8f0cfa2a44f73a65dcdf3619b4d9a4c73be8ee95
   Deleted: sha256:756a9ca24ca5006c555ae7cc7d914a89085d9adadd65ed78582da3ddeeaaa062
   Deleted: sha256:9abcf9e9b04d3affb1f033935111b22afa2de7cc2c159b3cf0adf75390c8e5d1
   Deleted: sha256:83d1844d37f945b5025c0c6d053a793a8ff4129b1a44a5f1dfc845dcf72a4585
+  ```
+  
   
   
   
