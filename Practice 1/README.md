@@ -25,16 +25,19 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
   ```
   
   'alpine:3.4' container is no longer running. 
+  ```
   $ docker ps -a
-  
+  ```
   Create a Dockerfile containing
   
+  ```Dockerfile
   FROM alpine:3.4
   MAINTAINER BJ Choi bjchoi.3698@gmail.com
   # Run a few package install for test purpose
   RUN apk update
   RUN apk add vim
   RUN apk add curl
+```
 
   Build a docker image
   $ docker build -t bj/apline-new:1.0 .
