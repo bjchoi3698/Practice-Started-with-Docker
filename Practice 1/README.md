@@ -10,6 +10,7 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
 3. Verify pulled docker images 
   $ docker images
   Start a docker container (alpine:3.4) interactively (-ti) and then remove after exit (--rm)
+  ```
   $ docker run -ti --rm alpine:3.4 /bin/sh
   / # [interactive shell prompt]
   Check what it has installed randomly
@@ -21,6 +22,7 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
   
   Let's get exit.
   / # exit
+  ```
   
   'alpine:3.4' container is no longer running. 
   $ docker ps -a
