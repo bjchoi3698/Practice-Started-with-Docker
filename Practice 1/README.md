@@ -30,7 +30,7 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
   ```
   Create a Dockerfile containing
   
-  ```Dockerfile
+```Dockerfile
   FROM alpine:3.4
   MAINTAINER BJ Choi bjchoi.3698@gmail.com
   # Run a few package install for test purpose
@@ -113,9 +113,16 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
   / # vim
   ```
   
-  Next exercise is to change package instal if we want 'git', but not 'vim'. Update Dockerfile.
+  Next exercise is to change package instal if we want 'git', but not 'vim'. Updated Dockerfile looks
   
+  ```Dockerfile Updated: replaced vim with git
+  FROM alpine:3.4
+  MAINTAINER BJ Choi bjchoi.3698@gmail.com
+  # Run a few package install for test purpose
+  RUN apk update
   RUN apk add git
+  RUN apk add curl
+```
   
   Build a docker image. 
   
