@@ -9,22 +9,19 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
 
 3. Verify pulled docker images 
   $ docker images
-  Start a docker container (alpine:3.4) interactively (-ti) and then remove after exit (--rm)
+  Start a docker container (alpine:3.4) interactively (-ti) and then remove after exit (--rm). It gives back interactive shell prompt (/ #) and verify software installed randomly.
   ```
   $ docker run -ti --rm alpine:3.4 /bin/sh
-  / # [interactive shell prompt]
-  Check what it has installed randomly
+  / # 
   / # git --version
   / # curl
   / # vim
-  (All failed to find)
   / # wget
-  
-  Let's get exit.
+  ...
   / # exit
   ```
   
-  'alpine:3.4' container is no longer running. 
+  'alpine:3.4' container is no longer running because of __*--rm*__ in docker run.
   ```
   $ docker ps -a
   ```
@@ -39,10 +36,9 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
   RUN apk add curl
 ```
 
-  Build a docker image
+  Build a docker image.   *( -t (tag) bj(provider)/alpine-new(image):1.0 (tag) . (from current directory) )*
   ```
   $ docker build -t bj/apline-new:1.0 .
-  ( -t (tag) bj(provider)/alpine-new(image):1.0 (tag) . (from current directory) )
   Sending build context to Docker daemon  10.75kB
   Step 1/5 : FROM alpine:3.4
    ---> c7fc7faf8c28
