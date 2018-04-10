@@ -207,7 +207,7 @@ $ docker build -t bj/alpine-new:1.0 .
 Sending build context to Docker daemon  10.75kB
 Step 1/3 : FROM alpine:3.4
  ---> c7fc7faf8c28
-Step 2/3 : MAINTAINER BJ Choi bjchoi.3698@gmail.com
+Step 2/3 : MAINTAINER ...
  ---> Using cache
  ---> 387a8c9a7a51
 Step 3/3 : RUN apk update   &&     apk add curl  &&     apk add vim &&     apk add git
@@ -240,8 +240,22 @@ COPY ./config.txt /usr/src/config.txt
 RUN apk update && \
     apk add curl vim git
 ```
+When we build a container, we could find the *config.txt* in /usr/src directory in the container.
 
-
+```
+$ docker build -t bj/alpine-new:1.0 .
+Sending build context to Docker daemon  11.78kB
+Step 1/4 : FROM alpine:3.4
+ ---> c7fc7faf8c28
+Step 2/4 : MAINTAINER ...
+ ---> Using cache
+ ---> 387a8c9a7a51
+Step 3/4 : COPY ./config.txt /usr/src/config.txt
+ ---> 46e963219139
+Step 4/4 : RUN apk update &&     apk add curl vim git
+ ---> Running in f8b85e3e3931
+```
+It is the last exercise of Practice #1. Read the Dockerfile Reference.
 
   
   
