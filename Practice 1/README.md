@@ -7,8 +7,10 @@ You will find out a lot of docker images. Let's start with 'php' image for exerc
 
 There are a lot of supported tags available. For demonstration, use [apache (7.2/stretch/apache/Dockerfile)]
 
-3. Verify pulled docker images 
+3. Verify pulled docker images
+```
   $ docker images
+```
   Start a docker container (alpine:3.4) *interactively* (-ti) and then *remove after exit* (--rm). It gives back interactive shell prompt (/ #) and verify software installed randomly.
   ```
   $ docker run -ti --rm alpine:3.4 /bin/sh
