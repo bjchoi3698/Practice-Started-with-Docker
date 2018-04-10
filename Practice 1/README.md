@@ -197,8 +197,9 @@ Single package run separately to add. We could change
       apk add vim && \
       apk add git
       
-## Alternatively, we can put them in one line
-## RUN apk update curl vim git 
+## Alternatively, 
+## RUN apk update && \
+##     apk curl vim git 
 ```
 The out of build is 
 ```
@@ -219,6 +220,26 @@ Successfully tagged bj/alpine-new:1.0
 Noticeable different is the number of steps which is 3 not 5 comparing the previous. 
 
 Go to "https://docs.docker.com" and get to __Reference__. Every Dockerfile must start with __FROM__. Check other commands such as __COPY__, __ADD__, __RUN__, __CMD__, __LABEL__, __ENV__
+
+It is the example of __COPY__. It is copied a file of outside docker into a container during build.
+Create a sample file, config.txt.
+```
+$ vim config.txt
+```
+It is an example of config.txt content:
+
+>It is a config file from outside of container.
+>Copy it into /usr/src directory
+
+Then update Dockerfile using __COPY__
+```Dockerfile with COPY
+FROM alpine:3.4
+MAINTAINER ...
+
+COPY ./config.txt /usr/src/config.txt
+RUN apk update && \
+    apk add curl vim git
+```
 
 
 
