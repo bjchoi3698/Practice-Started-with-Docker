@@ -174,8 +174,52 @@ There are a lot of supported tags available. For demonstration, use [apache (7.2
   Deleted: sha256:83d1844d37f945b5025c0c6d053a793a8ff4129b1a44a5f1dfc845dcf72a4585
   ```
   
-  
-  
+Next consideration is about the number of cache images created during build a container. We need make sure to minimize. Let's look at the original Dockerfile.
+```Dockerfile - original
+  FROM alpine:3.4
+  MAINTAINER ...
+  # Run a few package install for test purpose
+  RUN apk update
+  RUN apk add curl
+  RUN apk add vim
+  RUN apk add git
+```
+Single package run separately to add. We could change 
+
+```Dockerfile - update to minimize the cache images by putting every into a single line && \
+  FROM alpine:3.4
+  MAINTAINER ...
+  # Run a few package install for test purpose
+  RUN apk update   && \
+      apk add curl  && \
+      apk add vim && \
+      apk add git
+      
+## Alternatively, we can put them in one line
+## RUN apk update curl vim git 
+```
+The out of build is 
+```
+$ docker build -t bj/alpine-new:1.0 .
+Sending build context to Docker daemon  10.75kB
+Step 1/3 : FROM alpine:3.4
+ ---> c7fc7faf8c28
+Step 2/3 : MAINTAINER BJ Choi bjchoi.3698@gmail.com
+ ---> Using cache
+ ---> 387a8c9a7a51
+Step 3/3 : RUN apk update   &&     apk add curl  &&     apk add vim &&     apk add git
+ ---> Running in 4c79d4e6a2d4
+...
+Successfully built bc91c391b57c
+Successfully tagged bj/alpine-new:1.0
+```
+
+Noticeable different is the number of steps which is 3 not 5 comparing the previous. 
+
+Go to "https://docs.docker.com" and get to __Reference__. Every Dockerfile must start with __FROM__. Check other commands such as __COPY__, __ADD__, __RUN__, __CMD__, __LABEL__, __ENV__
+
+
+
   
   
   
