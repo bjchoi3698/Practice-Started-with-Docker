@@ -5,7 +5,7 @@ In this practice, add (install) Num.py to existing Python container.
 * Test a new image
 
 From Docker Store, I pick a Python image tag, 3.6.5-alpine3.4
-``` Python image tag, 3.6.5-alpine3.4
+```
 $ docker pull python:3.6.5-alpine3.4
 $ docker images
 ```
