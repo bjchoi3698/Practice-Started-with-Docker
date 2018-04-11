@@ -69,10 +69,22 @@ RUN pip install numpy
 ```
 
 HINT: To verify to check numpy installed.
-> / # python
-> >>> import numpy
-> >>> numpy.version.version
-> '1.14.2'
-> OR
-> >>> print(numpy.__version__)
+``` Execute interatively
+/ # python
+>>> import numpy
+>>> numpy.version.version
+'1.14.2'
+
+>>> print(numpy.__version__)
+'1.14.2'
+```
+*OR*
+
+``` Execute 
+/ # python -c "import numpy; print(numpy.version.version)"
+1.14.2
+/ # python -c "import numpy; print(numpy.__version__)"
+1.14.2
+```
+
 
