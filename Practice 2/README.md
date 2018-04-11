@@ -41,19 +41,20 @@ Command "/usr/local/bin/python -u -c "import setuptools, tokenize;__file__='/tmp
 Search for resolutions:
 1. by *failed with error code 1 in /tmp/pip-build-6gmc_3_v/numpy/* - No RESOLUTION
 2. by *Broken toolchain: cannot link a simple C program* - 
-```
+
+``` add make automake gcc g++ subversion python3-dev
 $ apk update
 $ apk add make automake gcc g++ subversion python3-dev 
 
 $ pip install numpy
 ...
 Successfully built numpy
-```
-Alternatively, add __build-base__ before pip install numpy.
-
 Installing collected packages: numpy
 Successfully installed numpy-1.14.2
 ```
+Alternatively, add __build-base__ before pip install numpy. 
+(*Adding __build_base__ requires creating a link of locale.h.*)
+(*ln -s /usr/include/locale.h /usr/include/xlocale.h*)
 
 Put together build a container image of Python on numpy
 ```Dockerfile - Python with numpy installed based on alpine3.4
@@ -62,7 +63,7 @@ FROM python:3.6.5-alpine3.4
 RUN apk update && apk add make automake gcc g++ subversion python3-dev
 (OR)
 RUN apk update && apk add build-base
-RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
+# RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
 
 RUN pip install numpy
 ```
