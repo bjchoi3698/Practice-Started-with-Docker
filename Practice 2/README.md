@@ -68,3 +68,11 @@ RUN apk update && apk add build-base
 RUN pip install numpy
 ```
 
+HINT: To verify to check numpy installed.
+> / # python
+> >>> import numpy
+> >>> numpy.version.version
+> '1.14.2'
+> OR
+> >>> print(numpy.__version__)
+
