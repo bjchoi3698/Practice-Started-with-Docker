@@ -1,24 +1,17 @@
-In this practice, add (install) Num.py to existing Python container.
-* Pull or use pulled python container
-* Create a new Dockerfile
-  * Try full Python container or lite container
-* Test a new image
+In this practice, add (install) __numpy__ to existing Python container and create a new container image.
 
-From Docker Store, I pick a Python image tag, 3.6.5-alpine3.4
+* Pick a Python container image from Docker Store or use already pulled one
+* Add __numpy__ manually
+* Create Dockerfile
+* Build a new image
+* Test
+
+From Docker Store, I pick a Python image tag, 3.6.5-alpine3.4 (lite version).
 ```
 $ docker pull python:3.6.5-alpine3.4
 $ docker images
 ```
 Test a pulled image.
-``` Test python manuall
-$ docker run -ti --rm python:3.6.5-alpine3.4 /bin/sh
-/ # which python
-/usr/local/bin/python
-/ # python --version
-Python 3.6.5
-/ # exit
-```
-We pulled a lean python image and try to install __numpy__ in it. 
 ```
 $ docker run -ti --rm python:3.6.5-alpine3.4 /bin/sh
 / # python --version
@@ -38,10 +31,12 @@ $ pip install numpy
     ----------------------------------------
 Command "/usr/local/bin/python -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-6gmc_3_v/numpy/setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" install --record /tmp/pip-dd8ac3nu-record/install-record.txt --single-version-externally-managed --compile" failed with error code 1 in /tmp/pip-build-6gmc_3_v/numpy/
 ```
-Search for resolutions:
-1. by *failed with error code 1 in /tmp/pip-build-6gmc_3_v/numpy/* - No RESOLUTION
-2. by *Broken toolchain: cannot link a simple C program* - 
 
+Search for resolutions:
+> by *failed with error code 1 in /tmp/pip-build-6gmc_3_v/numpy/* - Not easy to find RESOLUTION
+> by *Broken toolchain: cannot link a simple C program* 
+
+Add (make automake gcc g++ subversion python3-dev) or (build-base) before installing __numpy__
 ``` add make automake gcc g++ subversion python3-dev
 $ apk update
 $ apk add make automake gcc g++ subversion python3-dev 
@@ -52,11 +47,8 @@ Successfully built numpy
 Installing collected packages: numpy
 Successfully installed numpy-1.14.2
 ```
-Alternatively, add __build-base__ before pip install numpy. 
-(*Adding __build_base__ requires creating a link of locale.h.*)
-(*ln -s /usr/include/locale.h /usr/include/xlocale.h*)
 
-HINT: To verify to check numpy installed.
+HINT: To verify __numpy__ installed.
 ``` Execute interatively
 / # python
 >>> import numpy
@@ -74,15 +66,13 @@ HINT: To verify to check numpy installed.
 / # python -c "import numpy; print(numpy.__version__)"
 1.14.2
 ```
-
-Put together build a container image of Python on numpy
+Creat a new Dockerfile based on manual process
 ```Dockerfile - Python with numpy installed based on alpine3.4
 FROM python:3.6.5-alpine3.4
 
 RUN apk update && apk add make automake gcc g++ subversion python3-dev
 (OR)
 RUN apk update && apk add build-base
-# RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
 
 RUN pip install numpy
 ```
