@@ -32,9 +32,9 @@ $ pip install numpy
 Command "/usr/local/bin/python -u -c "import setuptools, tokenize;__file__='/tmp/pip-build-6gmc_3_v/numpy/setup.py';f=getattr(tokenize, 'open', open)(__file__);code=f.read().replace('\r\n', '\n');f.close();exec(compile(code, __file__, 'exec'))" install --record /tmp/pip-dd8ac3nu-record/install-record.txt --single-version-externally-managed --compile" failed with error code 1 in /tmp/pip-build-6gmc_3_v/numpy/
 ```
 
-Search for resolutions:
-  ** by *failed with error code 1 in /tmp/pip-build-6gmc_3_v/numpy/* - Not easy to find RESOLUTION
-  ** by *Broken toolchain: cannot link a simple C program* 
+\* Search for resolutions:
+  * by *failed with error code 1 in /tmp/pip-build-6gmc_3_v/numpy/* - Not easy to find RESOLUTION
+  * by *Broken toolchain: cannot link a simple C program* 
 
 Add (make automake gcc g++ subversion python3-dev) or (build-base) before installing __numpy__
 ``` add make automake gcc g++ subversion python3-dev
