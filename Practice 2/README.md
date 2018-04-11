@@ -55,4 +55,15 @@ Installing collected packages: numpy
 Successfully installed numpy-1.14.2
 ```
 
+Put together build a container image of Python on numpy
+```Dockerfile - Python with numpy installed based on alpine3.4
+FROM python:3.6.5-alpine3.4
+
+RUN apk update && apk add make automake gcc g++ subversion python3-dev
+(OR)
+RUN apk update && apk add build-base
+RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
+
+RUN pip install numpy
+```
 
